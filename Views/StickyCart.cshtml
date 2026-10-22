@@ -1,0 +1,38 @@
+@model StickyCartModel
+
+@*
+    Sticky add-to-cart bar: appears once the product page "Add to cart" button has scrolled out of view (above the viewport)
+    and clicks that button, so attributes / quantity / validation stay the product page's own.
+    The price element has the core price-value-{id} class, so attribute price changes update it too.
+*@
+<div x-data="{
+         show: false,
+         init() {
+             const target = document.getElementById('add-to-cart-button-@Model.ProductId');
+             if (!target || !('IntersectionObserver' in window)) return;
+             new IntersectionObserver(([entry]) => { this.show = !entry.isIntersecting && entry.boundingClientRect.top < 0; }).observe(target);
+         },
+         add() {
+             const target = document.getElementById('add-to-cart-button-@Model.ProductId');
+             if (target) target.click();
+         }
+     }"
+     x-show="show" x-cloak
+     x-transition:enter="transition duration-200 ease-out" x-transition:enter-start="translate-y-full" x-transition:enter-end="translate-y-0"
+     x-transition:leave="transition duration-150 ease-in" x-transition:leave-start="translate-y-0" x-transition:leave-end="translate-y-full"
+     class="sticky-add-to-cart fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 shadow-[0_-4px_16px_rgba(15,23,42,0.08)] backdrop-blur">
+    <div class="site-container flex items-center gap-3 py-3">
+        @if (!string.IsNullOrEmpty(Model.PictureUrl))
+        {
+            <img src="@Model.PictureUrl" alt="" class="hidden size-11 shrink-0 rounded-md border border-slate-100 object-contain sm:block">
+        }
+        <div class="min-w-0 flex-1">
+            <p class="truncate text-sm font-medium text-slate-900">@Model.Name</p>
+            <p class="price-value-@Model.ProductId text-sm font-bold text-slate-900">@Model.Price</p>
+        </div>
+        <button type="button" x-on:click="add()" class="btn btn-primary shrink-0 px-5 py-2.5">
+            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>
+            @Model.ButtonText
+        </button>
+    </div>
+</div>

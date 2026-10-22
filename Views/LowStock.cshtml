@@ -1,0 +1,16 @@
+@model LowStockModel
+
+@if (Model.Compact)
+{
+    <p class="low-stock text-xs font-semibold text-amber-700">@string.Format(T("Plugins.Widgets.NopwaraBoost.LowStock.Short").Text, Model.Quantity)</p>
+}
+else
+{
+    <p class="low-stock inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-800 ring-1 ring-amber-200">
+        <span class="relative flex size-2" aria-hidden="true">
+            <span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
+            <span class="relative inline-flex size-2 rounded-full bg-amber-500"></span>
+        </span>
+        @string.Format(T("Plugins.Widgets.NopwaraBoost.LowStock").Text, Model.Quantity)
+    </p>
+}

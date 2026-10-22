@@ -1,0 +1,23 @@
+@model CountdownModel
+
+@*sale countdown (ticks every second; hides itself when the sale is over)*@
+<div class="sale-countdown flex flex-wrap items-center gap-2 text-sm"
+     x-data="{
+         end: Date.parse('@Model.EndsOnUtc'),
+         left: 0,
+         timer: null,
+         tick() { this.left = Math.max(0, Math.floor((this.end - Date.now()) / 1000)); if (!this.left) clearInterval(this.timer); },
+         pad(n) { return String(n).padStart(2, '0'); },
+         get parts() { const s = this.left; return { d: Math.floor(s / 86400), h: Math.floor(s % 86400 / 3600), m: Math.floor(s % 3600 / 60), s: s % 60 }; }
+     }"
+     x-init="tick(); timer = setInterval(() => tick(), 1000)"
+     x-show="left > 0"
+     role="timer">
+    <span class="font-semibold text-red-700">@T("Plugins.Widgets.NopwaraBoost.Countdown")</span>
+    <span class="flex items-center gap-1 font-mono text-sm font-semibold tabular-nums text-slate-900">
+        <template x-if="parts.d > 0">
+            <span class="rounded bg-red-50 px-1.5 py-0.5 text-red-700" x-text="parts.d + '@T("Plugins.Widgets.NopwaraBoost.Countdown.Days").Text'"></span>
+        </template>
+        <span class="rounded bg-red-50 px-1.5 py-0.5 text-red-700" x-text="pad(parts.h) + ':' + pad(parts.m) + ':' + pad(parts.s)"></span>
+    </span>
+</div>

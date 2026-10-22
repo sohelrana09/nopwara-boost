@@ -1,0 +1,11 @@
+{
+  "Group": "Widgets",
+  "FriendlyName": "Nopwara conversion widgets",
+  "SystemName": "Widgets.NopwaraBoost",
+  "Version": "1.00",
+  "SupportedVersions": [ "5.00" ],
+  "Author": "Nopwara",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Widgets.NopwaraBoost.dll",
+  "Description": "Conversion widgets: free-shipping progress bar, sticky add-to-cart bar, low-stock badge and sale countdown, built with Tailwind CSS + Alpine.js for the Nopwara theme."
+}

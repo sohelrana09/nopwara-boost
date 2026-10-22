@@ -1,0 +1,98 @@
+@model Nop.Plugin.Widgets.NopwaraBoost.Models.ConfigurationModel
+
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+<form asp-controller="NopwaraBoostAdmin" asp-action="Configure" method="post">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-body">
+                    <p>@T("Plugins.Widgets.NopwaraBoost.Instructions")</p>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="AllowedThemes" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="AllowedThemes" />
+                            <span asp-validation-for="AllowedThemes"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="FreeShippingBarEnabled" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="FreeShippingBarEnabled" />
+                            <span asp-validation-for="FreeShippingBarEnabled"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="StickyAddToCartEnabled" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="StickyAddToCartEnabled" />
+                            <span asp-validation-for="StickyAddToCartEnabled"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="LowStockEnabled" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="LowStockEnabled" />
+                            <span asp-validation-for="LowStockEnabled"></span>
+                        </div>
+                    </div>
+                    <nop-nested-setting asp-for="LowStockEnabled">
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="LowStockThreshold" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="LowStockThreshold" />
+                                <span asp-validation-for="LowStockThreshold"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="LowStockOnProductBoxes" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="LowStockOnProductBoxes" />
+                                <span asp-validation-for="LowStockOnProductBoxes"></span>
+                            </div>
+                        </div>
+                    </nop-nested-setting>
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <nop-label asp-for="CountdownEnabled" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="CountdownEnabled" />
+                            <span asp-validation-for="CountdownEnabled"></span>
+                        </div>
+                    </div>
+                    <nop-nested-setting asp-for="CountdownEnabled">
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="CountdownMaxDays" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="CountdownMaxDays" />
+                                <span asp-validation-for="CountdownMaxDays"></span>
+                            </div>
+                        </div>
+                    </nop-nested-setting>
+                    <div class="form-group row">
+                        <div class="col-md-9 offset-md-3">
+                            <input type="submit" name="save" class="btn btn-primary" value="@T("Admin.Common.Save")" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
