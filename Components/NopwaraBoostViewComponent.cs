@@ -4,7 +4,7 @@ using Nop.Core.Infrastructure;
 using Nop.Plugin.Widgets.NopwaraBoost.Models;
 using Nop.Plugin.Widgets.NopwaraBoost.Services;
 using Nop.Services.Localization;
-using Nop.Services.Themes;
+using Nop.Web.Framework.Themes;
 using Nop.Web.Framework.Components;
 using Nop.Web.Framework.Infrastructure;
 using Nop.Web.Models.Catalog;
